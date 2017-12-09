@@ -120,7 +120,7 @@ else{
 		echo '<div class="box" id="'.html($FILE).'">'.
 			'<h2 ondblclick="toggleFile(this);" class="excluded">'.html($FILE).'</h2><p><span>'.
 			genIconLinks(null,"Scan_$FILE",false).'</span><br/>'.
-			'<a class="tool" target="_blank" href="scans/file/Scan_'.url($FILE).'" style="width:100%;"><img src="scans/thumb/'.url($IMAGE).'" alt="'.html($FILE).'" style="width:100%"/><span class="tip">View raw file</span></a>'.
+			'<a class="tool" target="_blank" href="scans/file/Scan_'.url($FILE).'" style="width:100%;" data-lightbox="FILES" data-title="'.$FILE.'"><img src="scans/thumb/'.url($IMAGE).'" alt="'.html($FILE).'" style="width:100%"/><span class="tip">View raw file</span></a>'.
 			'</p></div>';
 	}
 	echo '</div><script type="text/javascript">'. // Also see paper.php line 78

@@ -12,6 +12,8 @@ $Printer=$GLOBALS['Printer'];
 <link rel="shortcut icon" href="<?php echo $path; ?>res/images/favicon.png"/>
 <link rel="stylesheet" href="<?php echo $path; ?>res/style.php?theme=<?php echo $Theme; ?>" type="text/css"/>
 <script type="text/javascript" src="<?php echo $path; ?>jquery/jquery.min.js"></script>
+<link href="<?php echo $path; ?>/lightbox/css/lightbox.css" rel="stylesheet">
+
 <?php
 if(in_array($page,Array("Scan","Edit")))
 	echo '<link rel="stylesheet" type="text/css" href="'.$path.'jquery/imgareaselect-0.9.10/css/imgareaselect-animated.css"/>'."\n".

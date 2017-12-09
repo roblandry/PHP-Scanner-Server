@@ -1260,7 +1260,21 @@ else{
 			$CANNERS[$SCANNER]->{"DEVICE"}=$DEVICE2;
 			$DEVICE=shell($DEVICE2);
 		}
-		$cmd="scanimage -d $DEVICE $OURCE-l $X -t $Y -x $SIZE_X -y $SIZE_Y $DUPLEX--resolution $QUALITY --mode ".shell($MODE)." $LAMP--format=$RAW";
+
+		#$DEVICE='canondr:libusb:003:009';
+		#$OURCE='ADF Duplex';
+		#$X 0
+		#$Y 0
+		#$SIZE_X 215.9
+		#$SIZE_Y 279.4
+		#$DUPLEX="--ScanMode Duplex ";
+		#$QUALITY 150
+		#$MODE Color
+		#$RAW pnm
+
+		if ($SOURCE=='ADF Duplex') { $SOURCE='ADF'; $DUPLEX="--ScanMode Duplex "; }
+
+		$cmd="scanimage -d $DEVICE -l $X -t $Y -x $SIZE_X -y $SIZE_Y $DUPLEX--resolution $QUALITY --mode ".shell($MODE)." $LAMP--format=$RAW";
 		if($SOURCE=='ADF'||$SOURCE=='Automatic Document Feeder') # Multi-page scan
 			exe("cd $CANDIR;$cmd --batch",true);// Be careful with this, doing this without a ADF feeder will result in scanning the flatbed over and over, include --batch-count=3 for testing
 		else # Single page scan
@@ -1297,9 +1311,10 @@ else{
 		}
 		for($i=2,$ct=count($files);$i<$ct;$i++){
 			$SCAN=shell("$CANDIR/".$files[$i]);
-
-			# Dated Filename for scan image & preview image
-			$FILENAME=date("M_j_Y~G-i-s",filemtime("$CANDIR/".$files[$i])+$GMT);
+			# Create File name using file number
+			if ($ct > 1) { $r = $i-1; $temp_name = "($i)"; } else { $temp_name = ''; }
+			# Dated Filename for scan image & preview image (add file number)
+			$FILENAME=date("M_j_Y~G-i-s",filemtime("$CANDIR/".$files[$i])+$GMT).$temp_name;
 			$S_FILENAME="Scan_$SCANNER"."_"."$FILENAME.$FILETYPE";
 			$P_FILENAME="Preview_$SCANNER"."_"."$FILENAME.jpg";
 

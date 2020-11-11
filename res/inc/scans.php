@@ -93,6 +93,8 @@ else{
 				$msg.'T2='.$time[1].'&amp;T1='.$time[0].'">link</a> you can save.','center');
 		}
 	}
+	sort($FILES, SORT_NATURAL);
+
 	for($i=0,$max=count($FILES);$i<$max;$i++){
 		$FILE=$FILES[$i];
 		if(isset($time)){

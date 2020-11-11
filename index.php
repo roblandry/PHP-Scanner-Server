@@ -1297,9 +1297,9 @@ else{
 		#$MODE Color
 		#$RAW pnm
 
-		if ($SOURCE=='ADF Duplex') { $SOURCE='ADF'; $DUPLEX="--ScanMode Duplex "; }
+		if (strpos($DEVICE, 'canondr')) { $SOURCE='ADF'; $DUPLEX="--ScanMode Duplex"; }
 
-		$cmd="scanimage -d $DEVICE -l $X -t $Y -x $SIZE_X -y $SIZE_Y $DUPLEX--resolution $QUALITY --mode ".shell($MODE)." $LAMP--format=$RAW";
+		$cmd="scanimage -d $DEVICE -l $X -t $Y -x $SIZE_X -y $SIZE_Y $DUPLEX --resolution $QUALITY --mode ".shell($MODE)." $LAMP--format=$RAW";
 		if($SOURCE=='ADF'||$SOURCE=='Automatic Document Feeder') # Multi-page scan
 			exe("cd $CANDIR;$cmd --batch",true);// Be careful with this, doing this without a ADF feeder will result in scanning the flatbed over and over, include --batch-count=3 for testing
 		else # Single page scan
